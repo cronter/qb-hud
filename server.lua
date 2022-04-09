@@ -22,6 +22,8 @@ RegisterNetEvent('hud:server:GainStress', function(amount)
     local Player = QBCore.Functions.GetPlayer(src)
     local newStress
     if not Player or (Config.DisablePoliceStress and Player.PlayerData.job.name == 'police') then return end
+    if not Player or (Config.DisableAmbulanceStress and Player.PlayerData.job.name == 'ambulance') then return end
+    if not Player or (Config.DisableFirefighterStress and Player.PlayerData.job.name == 'firefighter') then return end
     if not ResetStress then
         if not Player.PlayerData.metadata['stress'] then
             Player.PlayerData.metadata['stress'] = 0
@@ -72,4 +74,4 @@ QBCore.Functions.CreateCallback('hud:server:HasHarness', function(source, cb)
 end)
 QBCore.Functions.CreateCallback('hud:server:getMenu', function(source, cb)
     cb(Config.Menu)
-end) 
+end)
